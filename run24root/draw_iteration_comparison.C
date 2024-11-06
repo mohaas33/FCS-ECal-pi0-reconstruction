@@ -192,7 +192,7 @@ void draw_iteration_comparison() {
     canvas_corr->cd(4);
     h_correction_ratio->Draw("COLZ");
 
-    canvas_corr->Print("./Plots/comp.png");
+    canvas_corr->Print("./Plots/comp_222.png");
     //// Wait for user input to close the canvas
     //canvas->Update();
     //std::cout << "Press Enter to exit..." << std::endl;
