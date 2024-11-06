@@ -18,8 +18,8 @@ double gxexp(double* x, double* p, int flag=0) {
 //using Akio's fitting function
 void draw_all_towersmassfit2(const char* day, const char* iteration)
 {
-	//TFile* File1005=TFile::Open(Form("StFcsPi0Result%s_All.root",date));
-	TFile* File1005=TFile::Open(Form("StFcsPi0invariantmass%stestAll_iteration%s.root",day,iteration));
+	TFile* File1005=TFile::Open("StFcsPi0invariantmass24212001_tot.root");
+	//TFile* File1005=TFile::Open(Form("StFcsPi0invariantmass%stestAll_iteration%s.root",day,iteration));
 
 	TCanvas *c5[36];
 	TCanvas *c6[36];
@@ -37,10 +37,10 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 	double peakmass = 0.135;
 	int fitentries = 150;
 
-	c1.Divide(22,34);
-	c2.Divide(22,34);
-	c5[1].Divide(5,5);
-	c6[1].Divide(5,5);
+	c1->Divide(22,34);
+	c2->Divide(22,34);
+	c5[1]->Divide(5,5);
+	c6[1]->Divide(5,5);
 	float mergin=0.1;
 	int ns,id,row,col,ehp,dep,ch;
 	Double_t oldgaincorr;
@@ -126,7 +126,7 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 		hist->SetLineWidth(1);
 		hist->Draw("same");
 		TLine* line=new TLine(0.135,0,0.135,(hist->GetMaximum()));
-                line.SetLineColor(2);
+        line->SetLineColor(2);
 		line->SetLineWidth(2);
 		Int_t allentries;
 		Int_t bkgtail;
@@ -409,7 +409,7 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 
 	}
 
-	c3.cd();
+	c3->cd();
 	h1_Northoldgaincorr->SetMarkerStyle(20);
 	h1_Northoldgaincorr->SetMarkerColor(2);
 	h1_Northoldgaincorr->Draw("P");
@@ -417,7 +417,7 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 	h1_Northnewgaincorr->SetMarkerColor(3);
 	h1_Northnewgaincorr->Draw("P same");
 	c3->SaveAs("Northtowergaincorr.root");
-	c4.cd();
+	c4->cd();
 	h1_Southoldgaincorr->SetMarkerStyle(20);
 	h1_Southoldgaincorr->SetMarkerColor(2);
 	h1_Southoldgaincorr->Draw("P");

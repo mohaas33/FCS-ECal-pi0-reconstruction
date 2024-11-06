@@ -9,7 +9,8 @@ my $folder = substr $current_folder, 0,-15;
 print "working folder: $folder\n";
 
 print "Please write down the entire run number or the first five digit of the run number:\n";
-my $run =<STDIN>;
+my $run = $ARGV[0];
+#my $run =<STDIN>;
 chomp($run);
 my $day = substr($run,2,3);
 my $yy = substr($run,0,2);
@@ -31,25 +32,29 @@ print "year = $year \n";
 my $mudstroot = "";
 if ($yy eq $yy23) {$mudstroot="/star/data1*/reco/production_pp500_2022/ReversedFullField/pp500_22_DEV_fcs/$year/$day/$run*/st_fwd*.MuDst.root";}
 if ($yy eq $yy24) {$mudstroot="/star/data1*/reco/production_AuAu_2023/ReversedFullField/P24ia_calib/$year/$day/$run*/st_fcs*MuDst.root";}
+<<<<<<< HEAD
 if ($yy eq $yy25) {$mudstroot="/star/data*/reco/pp200_production_radial/ReversedFullField/dev_calib/$year/$day/$run*/st_fwd*MuDst.root";}
+=======
+if ($yy eq $yy25) {$mudstroot="/star/data1*/TEMP/FCS_FO2/st_fwd_25*MuDst.root";}
+>>>>>>> 766b898... My changes
 print "$mudstroot \n";
 
 my $pi0root = "";
 if ($yy eq $yy23)
 {
-	$pi0root="$folder/run22root/$run/";
+	$pi0root="/gpfs01/star/pwg/eshulga/Files/run22root/$run/";
 	if (not -d $pi0root) {mkdir $pi0root or die "can not mkdir $pi0root \n";}
 }
 
 if ($yy eq $yy24)
 {
-	$pi0root="$folder/run23root/$run/";
+	$pi0root="/gpfs01/star/pwg/eshulga/Files/run23root/$run/";
 	if (not -d $pi0root) {mkdir $pi0root or die "can not mkdir $pi0root \n";}
 }
 
 if ($yy eq $yy25)
 {
-	$pi0root="$folder/run24root/$run/";
+	$pi0root="/gpfs01/star/pwg/eshulga/Files/run24root/$run/";
 	if (not -d $pi0root) {mkdir $pi0root or die "can not mkdir $pi0root \n";}
 }
 

@@ -16,11 +16,11 @@ double gxexp(double* x, double* p, int flag=0) {
 }
 
 //using Akio's fitting function
-void draw_all_towersmassfit2(const char* day, const char* iteration)
+void draw_all_towersmassfit2(const char* day="222", const char* iteration="2")
 {
 	//TFile* File1005=TFile::Open(Form("StFcsPi0Result%s_All.root",date));
-	TFile* File1005=TFile::Open(Form("StFcsPi0invariantmass%stestAll_iteration%s.root",day,iteration));
-
+	//TFile* File1005=TFile::Open(Form("StFcsPi0invariantmass%stestAll_iteration%s.root",day,iteration));
+	TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25222_tot.root");
 	TCanvas *c5[36];
 	TCanvas *c6[36];
 
@@ -37,10 +37,10 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 	double peakmass = 0.135;
 	int fitentries = 150;
 
-	c1.Divide(22,34);
-	c2.Divide(22,34);
-	c5[1].Divide(5,5);
-	c6[1].Divide(5,5);
+	c1->Divide(22,34);
+	c2->Divide(22,34);
+	c5[1]->Divide(5,5);
+	c6[1]->Divide(5,5);
 	float mergin=0.1;
 	int ns,id,row,col,ehp,dep,ch;
 	Double_t oldgaincorr;
@@ -126,7 +126,7 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 		hist->SetLineWidth(1);
 		hist->Draw("same");
 		TLine* line=new TLine(0.135,0,0.135,(hist->GetMaximum()));
-                line.SetLineColor(2);
+        line->SetLineColor(2);
 		line->SetLineWidth(2);
 		Int_t allentries;
 		Int_t bkgtail;
@@ -231,7 +231,7 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 			if (row ==34) {c5[row]->SaveAs(Form("NorthTowerResult_iteration%s.pdf]",iteration));}
 			if (!((row ==34)||(row ==1))) {c5[row]->SaveAs(Form("NorthTowerResult_iteration%s.pdf",iteration));}
 			c5[row+1]=new TCanvas("c5","c5",6000,6000);
-			c5[row+1].Divide(5,5);
+			c5[row+1]->Divide(5,5);
 
 		}
 
@@ -268,7 +268,7 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 		hist2->SetLineWidth(2);
 		hist2->Draw("same");
 		TLine* line=new TLine(0.135,0,0.135,(hist2->GetMaximum()));
-                line.SetLineColor(2);
+        line->SetLineColor(2);
 		line->SetLineWidth(2);
 		Int_t allentries;
 		Int_t bkgtail;
@@ -373,7 +373,7 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 			if (row ==34) {c6[34]->SaveAs(Form("SouthTowerResult_iteration%s.pdf]",iteration));}
 			if (!((row ==34)||(row ==1))) {c6[row]->SaveAs(Form("SouthTowerResult_iteration%s.pdf",iteration));}
 			c6[row+1]=new TCanvas("c6","c6",6000,6000);
-			c6[row+1].Divide(5,5);
+			c6[row+1]->Divide(5,5);
 
 		}
 
@@ -409,7 +409,7 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 
 	}
 
-	c3.cd();
+	c3->cd();
 	h1_Northoldgaincorr->SetMarkerStyle(20);
 	h1_Northoldgaincorr->SetMarkerColor(2);
 	h1_Northoldgaincorr->Draw("P");
@@ -417,7 +417,7 @@ void draw_all_towersmassfit2(const char* day, const char* iteration)
 	h1_Northnewgaincorr->SetMarkerColor(3);
 	h1_Northnewgaincorr->Draw("P same");
 	c3->SaveAs("Northtowergaincorr.root");
-	c4.cd();
+	c4->cd();
 	h1_Southoldgaincorr->SetMarkerStyle(20);
 	h1_Southoldgaincorr->SetMarkerColor(2);
 	h1_Southoldgaincorr->Draw("P");

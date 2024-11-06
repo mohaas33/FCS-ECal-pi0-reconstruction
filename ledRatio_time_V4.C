@@ -263,6 +263,8 @@ void predict_gain()
 //void history(int plt=0, int runnum=22346048, int ref=22335028){    
 //void history(int plt=0, int runnum=22346048, int ref=22357032){    
 void ledRatio_time_V4(int good_gain=23074018, const char *inputgaincorrfile = "fcsgaincorr.txt"){    
+	cout << "inputgaincorrfile:" << inputgaincorrfile << endl;
+
   gSystem->Load("libPhysics");
   gSystem->Load("St_base");
   gSystem->Load("StChain");

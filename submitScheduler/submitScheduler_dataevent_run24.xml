@@ -23,7 +23,8 @@
 
   <!-- Run log & error messages -->
   <stdout discard="true" />
-  <stderr URL="file:&folder;/submitScheduler/log/&runnumber;_$JOBINDEX.err" />
-  <output fromScratch="StFcs*.root" toURL="file:&folder;/run24root/&runnumber;/"/>
+  <stderr URL="file:/gpfs01/star/pwg/eshulga/tmp_output/log/fcs/&runnumber;_$JOBINDEX.err" />
+  <stdout URL="file:/gpfs01/star/pwg/eshulga/tmp_output/log/fcs/&runnumber;_$JOBINDEX.out" />
+  <output fromScratch="StFcs*.root" toURL="file:/gpfs01/star/pwg/eshulga/Files/run24root/&runnumber;/"/>
 
 </job>
