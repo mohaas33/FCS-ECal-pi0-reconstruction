@@ -105,8 +105,10 @@ void draw_iteration_comparison() {
   gSystem->Load("StFcsDbMaker");  
 
   
-  TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_222_2.txt","it1");
-  TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_222_3.txt","it2");
+  //TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_222_2.txt","it1");
+  //TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_222_3.txt","it2");
+  TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_22_1.txt","it1");
+  TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_22_2.txt","it2");
 
     TH2F *h_correction_ratio = (TH2F*)h_correction_it2->Clone("h_correction_ratio");
     h_correction_ratio->Divide(h_correction_it1);
@@ -160,14 +162,19 @@ void draw_iteration_comparison() {
     TH1F *h_status_axis = new TH1F("h_status_axis","h_status_axis",200,-100,100);
     h_correction_it1->GetYaxis()->SetRangeUser(-35,0);
     h_correction_it1->GetXaxis()->SetRangeUser(-23,23);
+    h_correction_it1->GetZaxis()->SetRangeUser(0.1,3);
+
     h_correction_it1->SetTitle("GainCorr@Begin");
     
     h_correction_it2->GetYaxis()->SetRangeUser(-35,0);
     h_correction_it2->GetXaxis()->SetRangeUser(-23,23);
+    h_correction_it2->GetZaxis()->SetRangeUser(0.1,3);
+
     h_correction_it2->SetTitle("GainCorr@End");
 
     h_correction_ratio->GetYaxis()->SetRangeUser(-35,0);
     h_correction_ratio->GetXaxis()->SetRangeUser(-23,23);
+    h_correction_ratio->GetZaxis()->SetRangeUser(0.1,5);
     h_correction_ratio->SetTitle("Slope=GainCorr@End/GainCorr@Begin");
     
     h_correction_it1  ->GetXaxis()->SetTitle("+-Col North <-> South");
@@ -192,7 +199,7 @@ void draw_iteration_comparison() {
     canvas_corr->cd(4);
     h_correction_ratio->Draw("COLZ");
 
-    canvas_corr->Print("./Plots/comp_222.png");
+    canvas_corr->Print("./Plots/comp_22.png");
     //// Wait for user input to close the canvas
     //canvas->Update();
     //std::cout << "Press Enter to exit..." << std::endl;

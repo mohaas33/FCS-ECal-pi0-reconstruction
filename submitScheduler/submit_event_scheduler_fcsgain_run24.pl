@@ -32,11 +32,10 @@ print "year = $year \n";
 my $mudstroot = "";
 if ($yy eq $yy23) {$mudstroot="/star/data1*/reco/production_pp500_2022/ReversedFullField/pp500_22_DEV_fcs/$year/$day/$run*/st_fwd*.MuDst.root";}
 if ($yy eq $yy24) {$mudstroot="/star/data1*/reco/production_AuAu_2023/ReversedFullField/P24ia_calib/$year/$day/$run*/st_fcs*MuDst.root";}
-<<<<<<< HEAD
-if ($yy eq $yy25) {$mudstroot="/star/data*/reco/pp200_production_radial/ReversedFullField/dev_calib/$year/$day/$run*/st_fwd*MuDst.root";}
-=======
+#if ($yy eq $yy25) {$mudstroot="/star/data*/reco/pp200_production_radial/ReversedFullField/dev_calib/$year/$day/$run*/st_fwd*MuDst.root";}
+
 if ($yy eq $yy25) {$mudstroot="/star/data1*/TEMP/FCS_FO2/st_fwd_25*MuDst.root";}
->>>>>>> 766b898... My changes
+
 print "$mudstroot \n";
 
 my $pi0root = "";
