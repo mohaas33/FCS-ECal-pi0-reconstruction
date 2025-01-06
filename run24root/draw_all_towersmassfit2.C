@@ -16,13 +16,15 @@ double gxexp(double* x, double* p, int flag=0) {
 }
 
 //using Akio's fitting function
-void draw_all_towersmassfit2(const char* day="22", const char* iteration="2")
+void draw_all_towersmassfit2(const char* day="170", const char* iteration="2")
 {
 	//TFile* File1005=TFile::Open(Form("StFcsPi0Result%s_All.root",date));
 	//TFile* File1005=TFile::Open(Form("StFcsPi0invariantmass%stestAll_iteration%s.root",day,iteration));
 	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25222_tot.root");
 	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass2522X_tot.root");
-	TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass2522X_2_tot.root");
+	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass2522X_2_tot.root");
+	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25170_1_tot.root");
+	TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25170_2_tot.root");
 	TCanvas *c5[36];
 	TCanvas *c6[36];
 
