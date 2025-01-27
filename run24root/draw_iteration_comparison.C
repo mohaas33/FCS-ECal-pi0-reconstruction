@@ -1,4 +1,5 @@
 #include <TFile.h>
+#include <TString.h>
 #include <TH2F.h>
 #include <TCanvas.h>
 #include <iostream>
@@ -74,7 +75,7 @@ TH2F *readFileAndProcess(const char* fileName, const char* histName) {
 }
 
 TH2F *get_histo(const char* fileName, const char* histName){
-
+  std::cout<< "OPEN File: " << fileName << std::endl; 
       // Open the first ROOT file
     TFile* file_N = TFile::Open(fileName, "READ");
     if (!file_N || file_N->IsZombie()) {
@@ -103,15 +104,19 @@ void draw_iteration_comparison() {
   gROOT->Macro("$STAR/StRoot/StMuDSTMaker/COMMON/macros/loadSharedLibraries.C");
   gSystem->Load("StEventMaker");
   gSystem->Load("StFcsDbMaker");  
-
+  int day = 170;
   
   //TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_222_2.txt","it1");
   //TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_222_3.txt","it2");
   //TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_22_1.txt","it1");
   //TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_22_2.txt","it2");
-  TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_170_1.txt","it1");
-  TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_170_2.txt","it2");
-
+  //TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_170_1.txt","it1");
+  //TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_170_2.txt","it2");
+  //TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_199_1.txt","it1");
+  //TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_199_2.txt","it2");
+  TH2F *h_correction_it1 = (TH2F*)readFileAndProcess(Form("fcsgaincorr_%d_1.txt",day),"it1");
+  TH2F *h_correction_it2 = (TH2F*)readFileAndProcess(Form("fcsgaincorr_%d_2.txt",day),"it2");
+  
     TH2F *h_correction_ratio = (TH2F*)h_correction_it2->Clone("h_correction_ratio");
     h_correction_ratio->Divide(h_correction_it1);
     TH1F *h_correction_ratio_1d = new TH1F("h_correction_ratio_1d","h_correction_ratio_1d",100,0,5);
@@ -123,10 +128,11 @@ void draw_iteration_comparison() {
             }
         }
     }
-    TH2F* h_status_S_it1 = (TH2F*)get_histo("statusS_iteration1.root", "statusS");
-    TH2F* h_status_N_it1 = (TH2F*)get_histo("statusN_iteration1.root", "statusN");
-    TH2F* h_status_S_it2 = (TH2F*)get_histo("statusS_iteration2.root", "statusS");
-    TH2F* h_status_N_it2 = (TH2F*)get_histo("statusN_iteration2.root", "statusN");
+
+    TH2F* h_status_S_it1 = (TH2F*)get_histo(Form("statusS_iteration_%d_1.root",day), "statusS");
+    TH2F* h_status_N_it1 = (TH2F*)get_histo(Form("statusN_iteration_%d_1.root",day), "statusN");
+    TH2F* h_status_S_it2 = (TH2F*)get_histo(Form("statusS_iteration_%d_2.root",day), "statusS");
+    TH2F* h_status_N_it2 = (TH2F*)get_histo(Form("statusN_iteration_%d_2.root",day), "statusN");
 
 
     // Draw histograms on a canvas
@@ -180,8 +186,8 @@ void draw_iteration_comparison() {
     canvas->cd(4);
     h_correction_it2->SetTitle("Correction Iteration #2");
     h_correction_it2->Draw("COLZ");
-    canvas->Print("./Plots/status_and_corr.png");
-
+    //canvas->Print("./Plots/status_and_corr.png");
+    canvas->Print(Form("./Plots/status_and_corr_%d.png",day));
     // Draw histograms on a canvas_corr
     TCanvas* canvas_corr = new TCanvas("canvas_corr", "Iterations Comparison", 1200, 900);
     gStyle->SetOptStat(0);
@@ -227,7 +233,8 @@ void draw_iteration_comparison() {
     canvas_corr->cd(4);
     h_correction_ratio->Draw("COLZ");
 
-    canvas_corr->Print("./Plots/comp_170.png");
+    //canvas_corr->Print("./Plots/comp_170.png");
+    canvas_corr->Print(Form("./Plots/comp_%d.png",day));
     //// Wait for user input to close the canvas
     //canvas->Update();
     //std::cout << "Press Enter to exit..." << std::endl;

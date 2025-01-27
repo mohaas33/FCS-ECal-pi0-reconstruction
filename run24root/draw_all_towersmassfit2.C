@@ -16,15 +16,17 @@ double gxexp(double* x, double* p, int flag=0) {
 }
 
 //using Akio's fitting function
-void draw_all_towersmassfit2(const char* day="170", const char* iteration="2")
+void draw_all_towersmassfit2(const char* day="170", const char* iteration="1")
 {
 	//TFile* File1005=TFile::Open(Form("StFcsPi0Result%s_All.root",date));
 	//TFile* File1005=TFile::Open(Form("StFcsPi0invariantmass%stestAll_iteration%s.root",day,iteration));
 	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25222_tot.root");
 	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass2522X_tot.root");
 	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass2522X_2_tot.root");
-	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25170_1_tot.root");
-	TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25170_2_tot.root");
+	TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25170_1_tot.root");
+	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25170_2_tot.root");
+	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25199_1_tot.root");
+	//TFile* File1005=TFile::Open("/gpfs01/star/pwg/eshulga/Files/run24root/StFcsPi0invariantmass25199_2_tot.root");
 	TCanvas *c5[36];
 	TCanvas *c6[36];
 
@@ -231,9 +233,9 @@ void draw_all_towersmassfit2(const char* day="170", const char* iteration="2")
 		if (col==22)
 		{
 
-			if (row ==1) {c5[row]->SaveAs(Form("NorthTowerResult_iteration%s.pdf[",iteration));}
-			if (row ==34) {c5[row]->SaveAs(Form("NorthTowerResult_iteration%s.pdf]",iteration));}
-			if (!((row ==34)||(row ==1))) {c5[row]->SaveAs(Form("NorthTowerResult_iteration%s.pdf",iteration));}
+			if (row ==1) {c5[row]->SaveAs(Form("NorthTowerResult_iteration_%s_%s.pdf[",day,iteration));}
+			if (row ==34) {c5[row]->SaveAs(Form("NorthTowerResult_iteration_%s_%s.pdf]",day,iteration));}
+			if (!((row ==34)||(row ==1))) {c5[row]->SaveAs(Form("NorthTowerResult_iteration_%s_%s.pdf",day,iteration));}
 			c5[row+1]=new TCanvas("c5","c5",6000,6000);
 			c5[row+1]->Divide(5,5);
 
@@ -241,7 +243,7 @@ void draw_all_towersmassfit2(const char* day="170", const char* iteration="2")
 
 	}	
 	c1->SaveAs("mass_by_tower_Ncluster.jpg");
-	statusN->SaveAs(Form("statusN_iteration%s.root",iteration));
+	statusN->SaveAs(Form("statusN_iteration_%s_%s.root",day,iteration));
 	h2_gaincorrectionN->SaveAs("gaincorrectionN.root");
 	h2_masspeakN->SaveAs("masspeakN.root");
 	h2_Northgaincorrration->SaveAs("NorthGainCorrectionRatio.root");
@@ -373,9 +375,9 @@ void draw_all_towersmassfit2(const char* day="170", const char* iteration="2")
 		if (col==22)
 		{
 
-			if (row ==1) {c6[1]->SaveAs(Form("SouthTowerResult_iteration%s.pdf[",iteration));}
-			if (row ==34) {c6[34]->SaveAs(Form("SouthTowerResult_iteration%s.pdf]",iteration));}
-			if (!((row ==34)||(row ==1))) {c6[row]->SaveAs(Form("SouthTowerResult_iteration%s.pdf",iteration));}
+			if (row ==1) {c6[1]->SaveAs(Form("SouthTowerResult_iteration_%s_%s.pdf[",day,iteration));}
+			if (row ==34) {c6[34]->SaveAs(Form("SouthTowerResult_iteration_%s_%s.pdf]",day,iteration));}
+			if (!((row ==34)||(row ==1))) {c6[row]->SaveAs(Form("SouthTowerResult_iteration_%s_%s.pdf",day,iteration));}
 			c6[row+1]=new TCanvas("c6","c6",6000,6000);
 			c6[row+1]->Divide(5,5);
 
@@ -383,7 +385,7 @@ void draw_all_towersmassfit2(const char* day="170", const char* iteration="2")
 
 	}	
 	c2->SaveAs("mass_by_tower_Scluster.jpg");
-	statusS->SaveAs(Form("statusS_iteration%s.root",iteration));
+	statusS->SaveAs(Form("statusS_iteration_%s_%s.root",day,iteration));
 	h2_gaincorrectionS->SaveAs("gaincorrectionS.root");
 	h2_masspeakS->SaveAs("masspeakS.root");
 	h2_Southgaincorrration->SaveAs("SouthGainCorrectionRatio.root");
