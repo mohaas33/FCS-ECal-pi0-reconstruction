@@ -104,7 +104,8 @@ void draw_iteration_comparison() {
   gROOT->Macro("$STAR/StRoot/StMuDSTMaker/COMMON/macros/loadSharedLibraries.C");
   gSystem->Load("StEventMaker");
   gSystem->Load("StFcsDbMaker");  
-  int day = 170;
+  int day_begin = 200;
+  int day = 200;
   
   //TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_222_2.txt","it1");
   //TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_222_3.txt","it2");
@@ -114,9 +115,11 @@ void draw_iteration_comparison() {
   //TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_170_2.txt","it2");
   //TH2F *h_correction_it1 = (TH2F*)readFileAndProcess("fcsgaincorr_199_1.txt","it1");
   //TH2F *h_correction_it2 = (TH2F*)readFileAndProcess("fcsgaincorr_199_2.txt","it2");
+  //TH2F *h_correction_beginning = (TH2F*)readFileAndProcess(Form("fcsgaincorr_170_2.txt",day),"it1");
+  //TH2F *h_correction_it1 = (TH2F*)readFileAndProcess(Form("fcsgaincorr_%d_2.txt",day_begin),"it2_begin");
   TH2F *h_correction_it1 = (TH2F*)readFileAndProcess(Form("fcsgaincorr_%d_1.txt",day),"it1");
-  TH2F *h_correction_it2 = (TH2F*)readFileAndProcess(Form("fcsgaincorr_%d_2.txt",day),"it2");
-  
+  TH2F *h_correction_it2 = (TH2F*)readFileAndProcess(Form("fcsgaincorr_%d_2.txt",day_begin),"it2");
+
     TH2F *h_correction_ratio = (TH2F*)h_correction_it2->Clone("h_correction_ratio");
     h_correction_ratio->Divide(h_correction_it1);
     TH1F *h_correction_ratio_1d = new TH1F("h_correction_ratio_1d","h_correction_ratio_1d",100,0,5);
@@ -129,15 +132,24 @@ void draw_iteration_comparison() {
         }
     }
 
+    //TH2F* h_status_S_it1 = (TH2F*)get_histo(Form("statusS_iteration_%d_2.root",day_begin), "statusS");
+    //TH2F* h_status_N_it1 = (TH2F*)get_histo(Form("statusN_iteration_%d_2.root",day_begin), "statusN");
     TH2F* h_status_S_it1 = (TH2F*)get_histo(Form("statusS_iteration_%d_1.root",day), "statusS");
     TH2F* h_status_N_it1 = (TH2F*)get_histo(Form("statusN_iteration_%d_1.root",day), "statusN");
-    TH2F* h_status_S_it2 = (TH2F*)get_histo(Form("statusS_iteration_%d_2.root",day), "statusS");
-    TH2F* h_status_N_it2 = (TH2F*)get_histo(Form("statusN_iteration_%d_2.root",day), "statusN");
+    TH2F* h_status_S_it2 = (TH2F*)get_histo(Form("statusS_iteration_%d_2.root",day_begin), "statusS");
+    TH2F* h_status_N_it2 = (TH2F*)get_histo(Form("statusN_iteration_%d_2.root",day_begin), "statusN");
 
 
     // Draw histograms on a canvas
     TCanvas* canvas = new TCanvas("canvas", "2D Histograms", 1200, 900);
     gStyle->SetOptStat(0);
+    gStyle->SetPalette(1);
+    // Setting up 2D plotting
+    float margin=0.15;
+    gStyle->SetPaperSize(20,26); 
+    gStyle->SetPadTopMargin(0.05);
+    gStyle->SetPadRightMargin(margin);
+  
     canvas->Divide(2, 2);  // Create a canvas with 2 pads (side by side)
     // Histo for axis
     TH1F *h_status_axis_1 = new TH1F("h_status_axis_1","h_status_axis_1",200,-100,100);
@@ -198,17 +210,17 @@ void draw_iteration_comparison() {
     h_correction_it1->GetXaxis()->SetRangeUser(-23,23);
     h_correction_it1->GetZaxis()->SetRangeUser(0.1,3);
 
-    h_correction_it1->SetTitle("GainCorr@Begin");
+    h_correction_it1->SetTitle(Form("GainCorr@Begin: %d", day_begin));
     
     h_correction_it2->GetYaxis()->SetRangeUser(-35,0);
     h_correction_it2->GetXaxis()->SetRangeUser(-23,23);
     h_correction_it2->GetZaxis()->SetRangeUser(0.1,3);
 
-    h_correction_it2->SetTitle("GainCorr@End");
+    h_correction_it2->SetTitle(Form("GainCorr@End: %d", day));
 
     h_correction_ratio->GetYaxis()->SetRangeUser(-35,0);
     h_correction_ratio->GetXaxis()->SetRangeUser(-23,23);
-    h_correction_ratio->GetZaxis()->SetRangeUser(0.95,1.1);
+    h_correction_ratio->GetZaxis()->SetRangeUser(0.95,1.031);
     h_correction_ratio->SetTitle("Slope=GainCorr@End/GainCorr@Begin");
     
     h_correction_it1  ->GetXaxis()->SetTitle("+-Col North <-> South");
@@ -234,7 +246,7 @@ void draw_iteration_comparison() {
     h_correction_ratio->Draw("COLZ");
 
     //canvas_corr->Print("./Plots/comp_170.png");
-    canvas_corr->Print(Form("./Plots/comp_%d.png",day));
+    canvas_corr->Print(Form("./Plots/comp_%d_%d.png",day_begin,day));
     //// Wait for user input to close the canvas
     //canvas->Update();
     //std::cout << "Press Enter to exit..." << std::endl;
